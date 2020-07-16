@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+outline: none;
+}
+
+body {
+background-image:linear-gradient(black,#1c478f);
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 40%;
+  min-width: 300px;
+}
+#check{
+position: absolute;
+top:532px;
+}
+h1 {
+  text-align: center; 
+font-size: 35px;
+font-weight: 600;
+margin: 0 0 30px 0; 
+}
+h4{
+font-size: 25px;
+font-weight: 500;
+ }
+p{
+font-size: 20px;
+font-weight: 500;
+}
+.try input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+.ch input{
+font-size: 17px;
+  font-family: Arial;
+  border: 1px solid #aaaaaa;
+}
+select{
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+
+input.invalid {
+  background-color: #ffdddd;
+}
+
+
+.tab {
+  display: none;
+}
+input[type=checkbox]{
+width:32px;
+}
+
+button {
+  background-color:#15223B;;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+font-size: 500;
+  font-family: Raleway;
+  cursor: pointer;
+text-transform: uppercase;
+border-radius: 5px;
+letter-spacing: 1px; 
+}
+input.large{
+width: 15px;
+height: 15px;
+
+}
+button:hover {
+  opacity: 0.8;
+background: #000;
+}
+
+
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #4CAF50;
+}
+</style>
+<body>
+
+<form name="myForms"id="regForm" onsubmit="return validateForm()">
+  <h1>Symptom Checker</h1>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab"><h4>Name:</h4>
+    <div class="try"><p><input placeholder="Enter Your name" oninput="this.className = ''" name="fname" required></p>
+    </div>
+    <h4>What is your gender?</h4>
+    <p>
+    <select>
+<option></option>
+<option>Male</option>
+<option>Female</option>
+<option>Others</option>
+</select>
+</p>
+   <div class="try"><h4>Please Enter your Age in Years</h4>
+   <p><input placeholder="Age" oninput="this.className = ''" name="fname" required></p>
+   </div>
+  </div>
+  <div class="tab"><h4>Do you currently have any of these health conditions?</h4>
+  <div class="ch" id="birds">
+    <p>
+    <input type="checkbox" class="large" name="nope" id="a1">No existing conditions</input><br>
+    <input type="checkbox" class="large" name="cname" id="a2">Asthama</input><br>
+       <input type="checkbox" class="large" name="cname" id="a3" value="cancer">Cancer</input><br>
+       <input type="checkbox" class="large" name="cname" id="a4">Chronic lung disease(COPD)</input><br>
+       <input type="checkbox" class="large" name="cname" id="a5">Diabetes</input><br>
+       <input type="checkbox" class="large" name="cname" id="a6">Hypertension</input><br>
+       <input type="checkbox" class="large" name="cname" id="a7">Heart disease</input></p>
+       </div>
+
+  </div>
+  <div class="tab"><h4>Have you or someone in your family staying with you came in close contact with a laboratory confirmed with a laboratory cormired COVID-19 patient in the last 14 days?</h4>
+    <p><select>
+<option></option>
+<option>Yes</option>
+<option>No</option>
+</select></p>
+<h4>Have you or someone in your family staying with you attended a large gathering/ in a migration centre in the last 14 days?</h4>
+<p><select>
+<option></option>
+<option>Yes</option>
+<option>No</option>
+</select></p>
+<h4>Are you or any of the family member staying with you currently working for essential services in public exposed places(such as hospitals, retail outlets, delivery services)?</h4>
+<p><select>
+<option></option>
+<option>Yes</option>
+<option>No</option>
+</select></p>
+  </div>
+  <div class="tab"><h4>Are you having one or more of the following symptoms?</h4>
+    <div class="ch">
+    <p>
+    <input type="checkbox" class="large" >None</input><br>
+    <input type="checkbox" class="large" >Fever</input><br>
+       <input type="checkbox" class="large" id="abc">Dry Cough</input><br>
+       <input type="checkbox" class="large">Feeling shortness of breadth</input><br>
+       <input type="checkbox" class="large">Sore throat</input><br>
+       <input type="checkbox" class="large">Hoarseness in voice</input><br>
+       <input type="checkbox" class="large">Headache</input><br>
+       <input type="checkbox" class="large">Running Nose</input><br>
+       <input type="checkbox" class="large">Loss of Smell</input></p>
+       <button type="button" id="check" onclick="my()">Check</button>
+       </div>
+  </div>
+
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+    </div>
+  </div>
+  
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+</form>
+
+<script>
+var currentTab = 0; 
+showTab(currentTab); 
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+
+
+
+function my()
+{
+var u=document.getElementById('birds').children;
+
+for(var i = 0; i < u.length; i++)
+{
+if(u[i].tagName=='INPUT' && u[i].type == 'checkbox')
+{
+if (u[i].checked) {
+                    alert(u[i].value + ' is checked!');
+                }
+}
+}
+}
+</script>
+
+</body>
+</html>
